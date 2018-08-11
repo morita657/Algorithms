@@ -3,10 +3,13 @@
  * @return {number}
  */
 var climbStairs = function(n) {
-  return climb(0, n);
-};
-const climb = (i, target) => {
-  if (i > target) return 0;
-  if (i === target) return 1;
-  return climb(i + 1, target) + climb(i + 2, target);
+  if (n === 1) return 1;
+  let first = 1,
+    second = 2;
+  for (let i = 3; i <= n; i++) {
+    let third = first + second;
+    first = second;
+    second = third;
+  }
+  return second;
 };
