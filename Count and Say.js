@@ -13,18 +13,13 @@ var countAndSay = function(n) {
 const counter = (input) => {
   let count = 1,
     output = "";
-  const memo = [];
   for (let i = 1; i <= input.length; i++) {
-    if (input[i] === input[i - 1]) {
+    if (input[i] !== input[i - 1]) {
+      output += count + input[i - 1];
+      count = 1;
+    } else {
       count++;
     }
-    if (input[i] !== input[i - 1]) {
-      memo.push(`${count}${input[i - 1]}`);
-      count = 1;
-    }
-  }
-  for (let j = 0; j < memo.length; j++) {
-    output += memo[j];
   }
   return output;
 };
