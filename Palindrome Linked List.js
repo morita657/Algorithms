@@ -11,15 +11,11 @@
  */
 var isPalindrome = function(head) {
   const result = [];
-  const recursive = (node) => {
-    if (node) {
-      result.push(node.val);
-      return recursive(node.next);
-    } else {
-      return result;
-    }
-  };
-  return check(recursive(head));
+  while (head) {
+    result.push(head.val);
+    head = head.next;
+  }
+  return check(result);
 };
 const check = (list) => {
   let j = list.length - 1;
