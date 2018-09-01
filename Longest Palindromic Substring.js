@@ -3,25 +3,28 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
-  if (s.length === 1) return s;
-  const result = [];
+  if (s === null || s.length < 1) return "";
+  // if (s.length === 1) return s;
+  let start = 0,
+    end = 0;
   for (let i = 0; i < s.length; i++) {
-    for (let j = i; j <= s.length; j++) {
-      if (isValid(s, i, j)) result.push(s.slice(i, j));
+    let len1 = expandAroundCenter(s, i, i);
+    let len2 = expandAroundCenter(s, i, i + 1);
+
+    let len = Math.max(len1, len2);
+    if (len > end - start) {
+      start = i - (len - 1) / 2;
+      end = i + len / 2;
     }
   }
-  result.sort();
-  let longestWord = "";
-  result.forEach((word) => {
-    if (word.length > longestWord.length) longestWord = word;
-  });
-  return longestWord;
+  return s.substring(Math.ceil(start), end + 1);
 };
-const isValid = (string, start, end) => {
-  const reverse = string
-    .slice(start, end)
-    .split("")
-    .reverse()
-    .join("");
-  return string.slice(start, end) === reverse;
+const expandAroundCenter = (s, left, right) => {
+  let l = left,
+    r = right;
+  while (l >= 0 && r < s.length && s.charAt(l) === s.charAt(r)) {
+    l--;
+    r++;
+  }
+  return r - l - 1;
 };
