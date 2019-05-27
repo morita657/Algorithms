@@ -1,10 +1,13 @@
 function linearSearch(A, key){
-    for(let i = 0; i < A.length; i++){
-        if(A[i]===key){
-            return i;
-        }
+    let i = 0, n = A.length;
+    A[n] = key;
+    while(A[i] !== key){
+        i++;
     }
-    return "Not Found";
+    if(i === n){
+        return "Not Found";
+    }
+    return i;
 }
 
 console.log(linearSearch([1,2,3,4,5],3));
