@@ -4,8 +4,8 @@ static const int N = 100;
 
 int main()
 {
-    int n, u, k, v;
     int M[N][N];
+    int n, u, k, v;
     cin >> n;
 
     for (int i = 0; i < n; i++)
@@ -22,7 +22,7 @@ int main()
         for (int j = 0; j < k; j++)
         {
             cin >> v;
-            M[u][v - 1] = 1;
+            M[u - 1][v - 1] = 1;
         }
     }
 
@@ -30,7 +30,11 @@ int main()
     {
         for (int j = 0; j < n; j++)
         {
-            cout << M[i][j] << " ";
+            if (j)
+            {
+                cout << " ";
+            }
+            cout << M[i][j];
         }
         cout << endl;
     }
