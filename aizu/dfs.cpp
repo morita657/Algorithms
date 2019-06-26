@@ -10,61 +10,34 @@ int n, M[N][N];
 int color[N], d[N], f[N], tt;
 int nt[N];
 
-int next(int u)
+int dfs_visit(int u)
 {
-    for (int v = nt[u]; v < n; v++)
+    int v;
+    color[u] = GRAY;
+    d[u] = ++tt;
+    for (int v = 0; v < n; v++)
     {
-        nt[u] = v + 1;
-        if (M[u][v])
+        if (M[u][v] == 0)
         {
-            return v;
+            continue;
+        }
+        if (color[v] == WHITE)
+        {
+            dfs_visit(v);
         }
     }
-    return -1;
+    color[u] = BLACK;
+    f[u] = ++tt;
 }
 
-void dfs_visit(int r)
+int dfs()
 {
-    for (int i = 0; i < n; i++)
+    int u;
+    for (int u = 0; u < n; u++)
     {
-        nt[i] = 0;
-    }
-    stack<int> S;
-    S.push(r);
-    color[r] = GRAY;
-    d[r] = ++tt;
-
-    while (!S.empty())
-    {
-        int u = S.top();
-        int v = next(u);
-        if (v != -1)
-        {
-            if (color[v] == WHITE)
-            {
-                color[v] = GRAY;
-                d[v] = ++tt;
-                S.push(v);
-            }
-        }
-        else
-        {
-            S.pop();
-            color[u] = BLACK;
-            f[u] = ++tt;
-        }
-    }
-}
-
-void dfs()
-{
-    for (int i = 0; i < n; i++)
-    {
-        color[i] = WHITE;
-        nt[i] = 0;
+        color[u] = WHITE;
     }
     tt = 0;
-
     for (int u = 0; u < n; u++)
     {
         if (color[u] == WHITE)
@@ -72,15 +45,15 @@ void dfs()
             dfs_visit(u);
         }
     }
-    for (int i = 0; i < n; i++)
+    for (int u = 0; u < n; u++)
     {
-        cout << i + 1 << " " << d[i] << " " << f[i] << endl;
+        cout << u + 1 << " " << d[u] << " " << f[u] << endl;
     }
 }
 
 int main()
 {
-    int u, k, v;
+    int u, v, k, i, j;
     cin >> n;
     for (int i = 0; i < n; i++)
     {
@@ -103,6 +76,5 @@ int main()
     }
 
     dfs();
-
     return 0;
 }
