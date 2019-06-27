@@ -1,80 +1,34 @@
 #include <iostream>
 #include <stack>
 using namespace std;
-static const int N = 100;
-static const int WHITE = 0;
-static const int GRAY = 1;
-static const int BLACK = 2;
 
-int n, M[N][N];
-int color[N], d[N], f[N], tt;
-int nt[N];
-
-int dfs_visit(int u)
+int dfs(int v, int visited[])
 {
-    int v;
-    color[u] = GRAY;
-    d[u] = ++tt;
-    for (int v = 0; v < n; v++)
+    if (visited[v])
     {
-        if (M[u][v] == 0)
-        {
-            continue;
-        }
-        if (color[v] == WHITE)
-        {
-            dfs_visit(v);
-        }
+        return;
     }
-    color[u] = BLACK;
-    f[u] = ++tt;
+    visited[v] = true;
+    // adjacent node u
+    for (int u = 0; u < (sizeof(v) / sizeof(*v)); u++)
+    {
+        dfs(u, visited);
+    }
 }
 
-int dfs()
+int DepthFirstSearch(int V)
 {
-    int u;
-    for (int u = 0; u < n; u++)
+    int visited[V];
+    for (int v = 0; v < V; v++)
     {
-        color[u] = WHITE;
+        visited[v] = false;
     }
-    tt = 0;
-    for (int u = 0; u < n; u++)
+    for (int w = 0; w < V; w++)
     {
-        if (color[u] == WHITE)
-        {
-            dfs_visit(u);
-        }
-    }
-    for (int u = 0; u < n; u++)
-    {
-        cout << u + 1 << " " << d[u] << " " << f[u] << endl;
+        dfs(w, visited);
     }
 }
 
 int main()
 {
-    int u, v, k, i, j;
-    cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            M[i][j] = 0;
-        }
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        cin >> u >> k;
-        u--;
-        for (int j = 0; j < k; j++)
-        {
-            cin >> v;
-            v--;
-            M[u][v] = 1;
-        }
-    }
-
-    dfs();
-    return 0;
 }
