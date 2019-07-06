@@ -1,16 +1,17 @@
-/**
- * @param {number} num
- * @return {string}
- */
-var intToRoman = function(num) {
-  M = ["", "M", "MM", "MMM"];
-  C = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
-  X = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
-  I = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+function intToRoman(num) {
+  var hash = [
+    ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"],
+    ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"],
+    ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"],
+    ["", "M", "MM", "MMM"]
+  ];
 
-  frth = M[Math.floor(num / 1000)] || "";
-  t = C[Math.floor((num % 1000) / 100)] || "";
-  s = X[Math.floor((num % 100) / 10)] || "";
-  f = I[num % 10] || "";
-  return frth + t + s + f;
-};
+  var result = "";
+  var counter = 0;
+  while (num > 0) {
+    result = hash[counter++][num % 10] + result;
+    num = Math.floor(num / 10);
+  }
+
+  return result;
+}
