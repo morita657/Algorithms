@@ -1,30 +1,29 @@
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[][]}
- */
 var fourSum = function(nums, target) {
-  const candidates = {};
-  let m = 0;
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = i + 1; j < nums.length; j++) {
-      for (let k = j + 1; k < nums.length; k++) {
-        for (let l = k + 1; l < nums.length; l++) {
-          candidate = nums[i] + nums[j] + nums[k] + nums[l];
-          candidates[m] = [nums[i], nums[j], nums[k], nums[l]];
-          m++;
-        }
+  return kSum(nums, target, 4);
+};
+
+var kSum = function(nums, target, k) {
+  let toSum = (ns, t, k, start) => {
+    let res = [];
+    if (k == 1) {
+      // recursive to only one target num ( the sum of last two num should be O(n^2))
+      for (let i = start; i < ns.length; i++) {
+        if (ns[i] == t) return [[ns[i]]];
+      }
+    } else {
+      for (let i = start; i < ns.length - k + 1; i++) {
+        let temp = toSum(ns, t - ns[i], k - 1, i + 1);
+        temp.forEach((t) => {
+          t.push(ns[i]);
+          res.push(t);
+        });
+        //skip duplication
+        while (i < ns.length - 1 && ns[i] == ns[i + 1]) i++;
       }
     }
-  }
-  const solutions = [];
-  const targets = Object.keys(candidates);
-  for (let i = 0; i < targets.length; i++) {
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    let sum = candidates[i].reduce(reducer, 0);
-    if (sum === target) {
-      solutions.push(candidates[i]);
-    }
-  }
-  return solutions;
+    return res;
+  };
+
+  nums = nums.sort((a, b) => a - b);
+  return toSum(nums, target, k, 0);
 };
