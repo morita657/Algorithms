@@ -5,10 +5,20 @@ var fourSum = function(nums, target) {
 var kSum = function(nums, target, k) {
   let toSum = (ns, t, k, start) => {
     let res = [];
-    if (k == 1) {
-      // recursive to only one target num ( the sum of last two num should be O(n^2))
-      for (let i = start; i < ns.length; i++) {
-        if (ns[i] == t) return [[ns[i]]];
+    if (k == 2) {
+      // 2 sum; ( improved to O(n) )
+      let rp = ns.length - 1;
+      let lp = start;
+      while (lp < rp) {
+        if (ns[lp] + ns[rp] == t) {
+          res.push([ns[lp], ns[rp]]);
+          //skip duplication
+          while (lp < rp && ns[lp] == ns[lp + 1]) lp++;
+          while (lp < rp && ns[rp] == ns[rp - 1]) rp--;
+          lp++;
+          rp--;
+        } else if (ns[lp] + ns[rp] < t) lp++;
+        else rp--;
       }
     } else {
       for (let i = start; i < ns.length - k + 1; i++) {
