@@ -3,11 +3,19 @@
  * @return {number}
  */
 var lengthOfLastWord = function(s) {
-  const spS = s.split(" ");
-  const len = spS.length;
-  for (let i = len - 1; i >= 0; i--) {
-    if (spS[i] !== "") {
-      return spS[i].length;
+  let len = 0,
+    l = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] !== " ") {
+      l = len++;
+    } else if (s == " ") {
+      len = 0;
     }
   }
+  return l;
 };
+console.log(lengthOfLastWord("Hello World"));
+console.log(lengthOfLastWord(""));
+console.log(lengthOfLastWord("a "));
+console.log(lengthOfLastWord("a"));
+console.log(lengthOfLastWord("Today is a nice day"));
