@@ -13,7 +13,8 @@ var maxDepth = function(root) {
   const height = 0,
     output = [];
   search(root, height, output);
-  return output.length;
+
+  return output;
 };
 function search(r, h, o) {
   if (r === null) {
@@ -27,4 +28,6 @@ function search(r, h, o) {
   o[h].push(r.val);
   search(r.left, h + 1, o);
   search(r.right, h + 1, o);
+
+  return o;
 }

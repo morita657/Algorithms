@@ -10,18 +10,23 @@
  * @return {ListNode}
  */
 var reverseList = function(head) {
-  const nodeVals = [];
-  search(head, nodeVals);
-  let index = 0;
-  nodeVals.reverse();
-  return nodeVals;
+  queue = [];
+  stock(head, queue);
+  reverse(head, queue);
+  return head;
 };
-
-const search = (node, nodeVals = []) => {
-  if (node) {
-    nodeVals.push(node.val);
-    search(node.next, nodeVals);
-  } else {
-    return nodeVals;
+function stock(h, q) {
+  if (h === null) {
+    return q;
   }
-};
+  q.push(h.val);
+  stock(h.next, q);
+}
+function reverse(h, q) {
+  if (h === null) {
+    return h;
+  }
+  h.val = q[q.length - 1];
+  q.pop();
+  reverse(h.next, q);
+}
