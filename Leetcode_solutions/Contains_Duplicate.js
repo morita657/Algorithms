@@ -2,19 +2,11 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-const containsDuplicate = function(nums) {
-  const candidates = {};
+var containsDuplicate = function(nums) {
+  memo = [];
   for (let i = 0; i < nums.length; i++) {
-    if (candidates.hasOwnProperty(nums[i])) {
-      candidates[nums[i]] += 1;
-    } else {
-      candidates[nums[i]] = 1;
-    }
-  }
-  for (let key in candidates) {
-    if (candidates[key] > 1) {
-      return true;
-    }
+    if (memo.includes(nums[i])) return true;
+    memo.push(nums[i]);
   }
   return false;
 };

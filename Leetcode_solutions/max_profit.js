@@ -1,19 +1,18 @@
-function main(list) {
-  let minv = list[0],
-    maxv = -20000000;
-  for (let j = 1; j < list.length; j++) {
-    if (maxv > list[j] - minv) {
+function main(prices) {
+  let minv = prices[0],
+    maxv = -Infinity;
+  for (let j = 1; j < prices.length; j++) {
+    if (maxv > prices[j] - minv) {
       maxv = maxv;
     } else {
-      maxv = list[j] - minv;
+      maxv = prices[j] - minv;
     }
-    if (minv < list[j]) {
+    if (minv < prices[j]) {
       minv = minv;
     } else {
-      minv = list[j];
+      minv = prices[j];
     }
   }
-  console.log(maxv, minv);
 
   return maxv - minv;
 }
