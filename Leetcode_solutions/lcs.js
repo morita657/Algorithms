@@ -1,37 +1,39 @@
-let main = (standardInput) => {
-  let q = standardInput.split("\n"),
-    num = Number.parseInt(q),
-    i = 0;
-  const input = [];
-
-  while (i < num * 2) {
-    input.push([q[i + 1], q[i + 2]]);
-    (first = []), (second = []);
-    i += 2;
+N = 1000;
+function lcs(X, Y) {
+  // make 2-d array
+  c = [];
+  for (let i = 0; i <= N; i++) {
+    c.push([]);
   }
+  maxl = 0;
+  cnt = 0;
 
-  const lcs = (X, Y, m, n) => {
-    // base case n===0, m===0
-    if (n === 0 || m === 0) {
-      result = 0;
-    } else if (X[m - 1] === Y[n - 1]) {
-      result = 1 + lcs(X, Y, m - 1, n - 1);
-    } else if (X[m - 1] !== Y[n - 1]) {
-      tmp1 = lcs(X, Y, m - 1, n);
-      tmp2 = lcs(X, Y, m, n - 1);
-      result = Math.max.apply(null, [tmp1, tmp2]);
+  m = X.length;
+  n = Y.length;
+  for (let i = 1; i <= m; i++) {
+    c[i][0] = 0;
+  }
+  for (let j = 1; j <= n; j++) {
+    c[0][j] = 0;
+  }
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (X[i] === Y[j]) {
+        c[i][j] = c[i - 1][j - 1] + 1;
+        cnt++;
+      } else if (c[i - 1][j] >= c[i][j - 1]) {
+        c[i][j] = c[i - 1][j];
+        cnt++;
+      } else {
+        c[i][j] = c[i][j - 1];
+        cnt++;
+      }
+      maxl = Math.max(maxl, c[i][j]);
     }
-
-    return result;
-  };
-
-  //   input each strings in lcs and return the length of longeest common string
-  let j = 0;
-  while (j < input.length) {
-    console.log(
-      lcs(input[j][0], input[j][1], input[j][0].length, input[j][1].length)
-    );
-    j++;
   }
-};
-main(require("fs").readFileSync("./dev/stdin/input.txt", "UTF-8"));
+
+  return cnt;
+}
+
+console.log(lcs("abcbdab", "bdcaba"));
+console.log(lcs("sea", "eat"));
