@@ -1,36 +1,30 @@
-import operator
-import math
-
-
-class Solution(object):
+class Solution:
+    # @param tokens, a list of string
+    # @return an integer
     def evalRPN(self, tokens):
-        """
-        :type tokens: List[str]
-        :rtype: int
-        """
-        nums = []
-        result = 0
-        # etc.
-        ops = {"+": operator.add, "-": operator.sub,
-               "*": operator.mul, "/": operator.div}
-# print ops["+"](1,1)
-        for elem in tokens:
-            if elem.isdigit():
-                print 'elem: ', int(elem)
-                nums.append(int(elem))
+        stack = []
+        operators = ["+", "-", "*", "/"]
+        for token in tokens:
+            if token not in operators:
+                stack.append(int(token))
             else:
-                print nums
-                res = ops[elem](nums[len(nums) - 2], nums[len(nums) - 1])
-                res = math.floor(res)
-                # print nums[len(nums) - 1] 5
-                nums.pop(len(nums) - 1)
-                # print nums[len(nums) - 2] 4
-                nums.pop(len(nums) - 1)
-                nums.append(res)
-        return int(nums[0])
-
-
-["2", "1", "+", "3", "*"]
-["4", "13", "5", "/", "+"]
-["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
-# ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+                if len(stack) < 2:
+                    return False
+                second = stack.pop()
+                first = stack.pop()
+                if token == "+":
+                    result = first + second
+                elif token == "-":
+                    result = first - second
+                elif token == "*":
+                    result = first * second
+                else:
+                    if second == 0:
+                        return False
+                    result = abs(first) / abs(second)
+                    if first * second < 0:
+                        result = -result
+                stack.append(result)
+        if len(stack) != 1:
+            return False
+        return (stack[0])
