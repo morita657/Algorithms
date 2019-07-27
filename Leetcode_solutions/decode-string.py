@@ -1,26 +1,17 @@
 class Solution(object):
     def decodeString(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        dict = {}
-        prosessed = []
-        splitted_s = s.split("[")
-        for elem in splitted_s:
-            if "]"in elem:
-                splitted_elem = elem.split("]")
-                # concat in prosessed
-                prosessed = prosessed + splitted_elem
+        stack = []
+        stack.append(["", 1])
+        num = ""
+        for ch in s:
+            if ch.isdigit():
+                num += ch
+            elif ch == '[':
+                stack.append(["", int(num)])
+                num = ""
+            elif ch == ']':
+                st, k = stack.pop()
+                stack[-1][0] += st * k
             else:
-                prosessed.append(elem)
-        num = 0
-        string = ""
-        result = ""
-        for e in prosessed:
-            if e.isdigit():
-                num = e
-            else:
-                string = e
-            result += string * num
-        return result
+                stack[-1][0] += ch
+        return stack[0][0]
