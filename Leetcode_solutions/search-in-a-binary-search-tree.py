@@ -13,12 +13,10 @@ class Solution(object):
         :type val: int
         :rtype: TreeNode
         """
-        traverse = root
-        while traverse:
-            if traverse.val == val:
-                return traverse
-            else:
-                if val > traverse.val:
-                    traverse = traverse.right
-                else:
-                    traverse = traverse.left
+        if root and root.val == val:
+            return root
+        if root and val > root.val:
+            return self.searchBST(root.right, val)
+        if root and val < root.val:
+            return self.searchBST(root.left, val)
+        return None
