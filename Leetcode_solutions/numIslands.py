@@ -1,3 +1,4 @@
+# DFS
 class Solution(object):
     def numIslands(self, grid):
         """
@@ -28,7 +29,33 @@ class Solution(object):
         self.dfs(grid, i, j - 1)
 
 
-# Solution()
+Solution()
+solution = Solution()
+solution.numIslands([["1", "1", "1", "1", "0"], ["1", "1", "0", "1", "0"], [
+                    "1", "1", "0", "0", "0"], ["0", "0", "0", "0", "0"]])
+
+
+class Solution(object):
+    def numIslands(self, grid):
+        count = 0
+        for r in xrange(len(grid)):
+            for c in xrange(len(grid[0])):
+                if grid[r][c] == "1":
+                    count += 1
+                    self.dfs(grid, r, c)
+        print count
+        return count
+
+    def dfs(self, grid, r, c):
+        if not (0 <= r < len(grid)) or not (0 <= c < len(grid[0])) or grid[r][c] == "0":
+            return
+        grid[r][c] = "0"
+        self.dfs(grid, r + 1, c)
+        self.dfs(grid, r - 1, c)
+        self.dfs(grid, r, c + 1)
+        self.dfs(grid, r, c - 1)
+
+
 solution = Solution()
 solution.numIslands([["1", "1", "1", "1", "0"], ["1", "1", "0", "1", "0"], [
                     "1", "1", "0", "0", "0"], ["0", "0", "0", "0", "0"]])
