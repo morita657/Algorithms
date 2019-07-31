@@ -1,4 +1,3 @@
-# brute force
 class KthLargest(object):
 
     def __init__(self, k, nums):
@@ -6,27 +5,15 @@ class KthLargest(object):
         :type k: int
         :type nums: List[int]
         """
+        self.pool = nums
         self.k = k
-        self.nums = nums
-        self.nums.append(float("inf"))
+        heapq.heapify(self.pool)
+        while len(self.pool) > k:
+            heapq.heappop(self.pool)
 
     def add(self, val):
-        """
-        :type val: int
-        :rtype: int
-        """
-        self.nums.append(val)
-        self.nums.sort()
-        target = 0
-        self.nums.reverse()
-        index = 1
-        while index < len(self.nums):
-            if index == self.k:
-                target = self.nums[index]
-            index += 1
-        return target
-
-
-# Your KthLargest object will be instantiated and called as such:
-# obj = KthLargest(k, nums)
-# param_1 = obj.add(val)
+        if len(self.pool) < self.k:
+            heapq.heappush(self.pool, val)
+        elif val > self.pool[0]:
+            heapq.heapreplace(self.pool, val)
+        return self.pool[0]
