@@ -7,17 +7,20 @@ import re
 import sys
 
 # Complete the minimumSwaps function below.
+
+
 def minimumSwaps(arr):
-    cnt = 0
-    for i in range(len(arr)):
-        for j in range(0, len(arr)-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1]=arr[j+1], arr[j]
-                cnt += 1
-    return cnt
-
-    
-
+    swap = 0
+    i = 0
+    while i < len(arr):
+        # Bug in input data which violates problem constraints
+        if arr[i] == (i + 1):
+            i += 1
+            continue
+        print i, arr[arr[i] - 1], arr[i], arr
+        arr[arr[i] - 1], arr[i] = arr[i], arr[arr[i] - 1]
+        swap += 1
+    return swap
 
 
 if __name__ == '__main__':
@@ -32,4 +35,3 @@ if __name__ == '__main__':
     fptr.write(str(res) + '\n')
 
     fptr.close()
-
