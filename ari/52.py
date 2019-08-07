@@ -7,28 +7,26 @@ import re
 import sys
 
 n = 4
-# (w, v)
-s = [(2, 3), (1, 2), (3, 4), (2, 2)]
+s = [(2, 3), (1, 2), (3, 4), (2, 2)]  # w,v
 W = 5
-total = 0
-weight = 0
-
 res = 0
 
 
-def dfs(weight, total, i, s):
+def knapsack(i,  weight):
     if i == n:
-        return total
-    if s[i][0] > W:
-        res = dfs(weight, total, i + 1, s)
+        res = 0
+    elif weight < s[i][0]:
+        res = knapsack(i + 1, weight)
     else:
-        res = max(dfs(total + s[i][1], weight + s[i][0],
-                      i + 1, s), dfs(total, weight, i + 1, s))
+        res = max(
+            knapsack(i + 1, weight - s[i][0]) + s[i][1],
+            knapsack(i + 1, weight)
+        )
     return res
 
 
 def main():
-    print dfs(0, 0, 0, s)
+    print(knapsack(0, W))
     return 0
 
 
