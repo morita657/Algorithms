@@ -34,7 +34,6 @@ class Solution(object):
             # explore the neighborhood and find the cheapest location
             for nei, d in graph[cand_node]:
                 dist[nei] = min(dist[nei], dist[cand_node] + d)
-
         ans = max(dist.values())
         return ans if ans < float('inf') else -1
 
@@ -47,14 +46,10 @@ print(s)
 
 class Solution(object):
     def networkDelayTime(self, times, N, K):
-        graph = defaultdict(list)
         dist = {node: float('inf') for node in xrange(1, N + 1)}
         dist[K] = 0
         for u, v, w in times:
-            graph[u].append((v, w))
-        for i in range(1, N + 1):
-            for u, v, w in times:
-                dist[v] = min(dist[v], dist[u] + w)
+            dist[v] = min(dist[v], dist[u] + w)
         res = -1
         for key in dist:
             res = max(dist[key], res)
