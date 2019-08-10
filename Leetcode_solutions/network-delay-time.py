@@ -1,5 +1,7 @@
 from collections import defaultdict
 
+# Dijkstra's
+
 
 class Solution(object):
     def networkDelayTime(self, times, N, K):
@@ -35,6 +37,28 @@ class Solution(object):
 
         ans = max(dist.values())
         return ans if ans < float('inf') else -1
+
+
+s = Solution().networkDelayTime([[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2)
+print(s)
+
+
+# Bellman-Ford
+
+class Solution(object):
+    def networkDelayTime(self, times, N, K):
+        graph = defaultdict(list)
+        dist = {node: float('inf') for node in xrange(1, N + 1)}
+        dist[K] = 0
+        for u, v, w in times:
+            graph[u].append((v, w))
+        for i in range(1, N + 1):
+            for u, v, w in times:
+                dist[v] = min(dist[v], dist[u] + w)
+        res = -1
+        for key in dist:
+            res = max(dist[key], res)
+        return res if res < float('inf') else -1
 
 
 s = Solution().networkDelayTime([[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2)
