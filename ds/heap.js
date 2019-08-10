@@ -21,29 +21,35 @@ class BinaryHeap {
     }
     heap[i] = x;
   }
-
   pop() {
-    //   minimum value
-    let ret = this.heap[0];
-    // value to bring to the root
-    let x = this.heap[this.sz--];
-    // bubble down from the root
-    let i = 0;
-    while (i * 2 + 1 < this.sz) {
-      // compare between children
-      let a = i * 2 + 1,
-        b = i * 2 + 2;
-      if (b < this.sz && this.heap[b] < this.heap[a]) {
-        a = b;
-      }
-      // break when there is no upsidedown
-      if (this.heap[a] >= x) {
-        break;
-      }
-      //   hoist the children's value
-      heap[i] = heap[a];
+    head = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this.bubbleDown(0);
+    return head;
+  }
+
+  bubbleDown(index) {
+    let left = index * 2 + 1,
+      right = index * 2 + 2,
+      largest = index;
+    // if left node is larger than , swap it
+    if (this.heap[left] > this.heap[largest]) {
+      largest = left;
     }
-    heap[i] = x;
-    return ret;
+    //   if right node is larger than the head, swap it
+    if (this.heap[right] > this.heap[largest]) {
+      largest = right;
+    }
+    // swap
+    if (index !== largest) {
+      temp = largest;
+      largest = index;
+      index = temp;
+      [this.heap[index], this.heap[largest]] = [
+        this.heap[largest],
+        this.heap[index]
+      ];
+      this.bubbleDown(largest);
+    }
   }
 }
