@@ -1,14 +1,11 @@
 
 
 def main(first, second):
-    interest = {}
+    cnt = []
     hobbies = first + second
     for i in range(len(hobbies)):
-        if hobbies[i] in interest.keys():
-            interest[hobbies[i]] += 1
-        else:
-            interest[hobbies[i]] = 1
-    return max(interest.values())
+        cnt.append(hobbies.count(hobbies[i]))
+    return max(cnt)
 
 
 print(main(['fishing', 'gardening', 'swimming', 'fishing'],
