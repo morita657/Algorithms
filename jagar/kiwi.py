@@ -3,14 +3,10 @@
 def main(capacities, bottles, fromId, toId):
 
     for i in range(len(fromId)):
-        if bottles[toId[i]] + bottles[fromId[i]] < capacities[toId[i]]:
-            bottles[toId[i]] = bottles[toId[i]] + bottles[fromId[i]]
-            bottles[fromId[i]] = 0
-        else:
-            diff = capacities[toId[i]] - \
-                (bottles[toId[i]] + bottles[fromId[i]])
-            bottles[toId[i]] = capacities[toId[i]]
-            bottles[fromId[i]] = abs(diff)
+        vol = abs(min(bottles[fromId[i]],
+                      capacities[toId[i]] - (bottles[toId[i]])))
+        bottles[toId[i]] += vol
+        bottles[fromId[i]] -= vol
     return bottles
 
 
