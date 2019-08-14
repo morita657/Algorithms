@@ -1,12 +1,11 @@
 def main(numbers):
     output = [0 for _ in range(len(numbers))]
-    ops = ["*" for _ in range(len(numbers) - 1)] + [""]
     for i in range(len(numbers)):
         nums = numbers[:i] + [numbers[i] + 1] + numbers[i + 1:]
-        calc = ""
-        for j in range(len(ops)):
-            calc += str(nums[j]) + ops[j]
-        output.append(eval(calc))
+        calc = 1
+        for j in range(len(numbers)):
+            calc *= nums[j]
+        output.append(calc)
     return max(output)
 
 
