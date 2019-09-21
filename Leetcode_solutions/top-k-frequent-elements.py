@@ -24,3 +24,32 @@ class Solution(object):
         for j in range(len(temp)):
             result.append(temp[j][1])
         return result
+
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        if len(nums) == 0:
+            return None
+        d = collections.defaultdict(int)
+        for i in range(len(nums)):
+            d[nums[i]] += 1
+        ans = []
+        for index, key in enumerate(d):
+            ans.append((d[key], key))
+        ans.sort()
+        ans = ans[::-1]
+        res = []
+        for i in range(k):
+            res.append(ans[i][1])
+        return res
+
+
+class Solution:
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        count = collections.Counter(nums)
+        return heapq.nlargest(k, count.keys(), key=count.get)
