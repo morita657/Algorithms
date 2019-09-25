@@ -1,3 +1,22 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        o = []
+        for i in range(len(coins)):
+            self.dfs([], coins, o, amount)
+        if len(o) > 0:
+            return min(o)
+        else:
+            return -1
+
+    def dfs(self, current, coins, output, amount):
+        if sum(current) == amount and len(current) not in output:
+            output.append(len(current))
+            return
+        if sum(current) > amount:
+            return
+        else:
+            for i in range(len(coins)):
+                self.dfs(current + [coins[i]], coins, output, amount)
 
 
 class Solution:
