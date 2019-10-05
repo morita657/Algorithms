@@ -32,3 +32,22 @@ class Solution:
                 dp[j] = dp[j] + dp[j - 1]
         print(dp)
         return dp[n - 1]
+
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        memo = {}
+
+        def helper(i, j):
+            if (i, j) in memo:
+                return memo[i, j]
+            ans = 0
+            if i < m:
+                ans += helper(i + 1, j)
+            if j < n:
+                ans += helper(i, j + 1)
+            if i == m and j == n:
+                ans += 1
+            memo[i, j] = ans
+            return memo[i, j]
+        return helper(1, 1)
