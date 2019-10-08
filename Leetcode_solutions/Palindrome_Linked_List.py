@@ -18,3 +18,21 @@ class Solution:
             return cand[:mid + 1][::-1] == cand[mid:]
         else:
             return cand[:mid][::-1] == cand[mid:]
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        seen = []
+        while head:
+            if head.val in seen:
+                seen.pop()
+            else:
+                seen.append(head.val)
+            head = head.next
+        return len(seen) == 0
