@@ -21,3 +21,18 @@ class Solution:
             first = first.next
         first.next = first.next.next
         return dummy.next
+
+
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        dummy = ListNode(0)
+        dummy.next = head
+        first = dummy
+        second = dummy
+        for i in range(1, n + 2):
+            first = first.next
+        while first != None:
+            first = first.next
+            second = second.next
+        second.next = second.next.next
+        return dummy.next
