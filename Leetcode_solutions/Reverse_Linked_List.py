@@ -37,3 +37,28 @@ class Solution:
         h.val = q[len(q) - 1]
         q.pop()
         self.reverse(h.next, q)
+
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        prev = None
+        curr = head
+        while curr != None:
+            nextTemp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nextTemp
+        return prev
+
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head == None:
+            return head
+        currentHead = head
+        while head.next != None:
+            p = head.next
+            head.next = p.next
+            p.next = currentHead
+            currentHead = p
+        return currentHead
