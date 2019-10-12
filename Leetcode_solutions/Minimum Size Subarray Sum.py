@@ -66,3 +66,17 @@ class Solution:
                 left += 1
             right += 1
         return res if res <= len(nums) else 0
+
+
+class Solution:
+    def minSubArrayLen(self, s: int, nums: List[int]) -> int:
+        ans = float('inf')
+        left = 0
+        current = 0
+        for right in range(len(nums)):
+            current += nums[right]
+            while current >= s:
+                ans = min(ans, right - left + 1)
+                current -= nums[left]
+                left += 1
+        return ans if ans != float('inf') else 0
