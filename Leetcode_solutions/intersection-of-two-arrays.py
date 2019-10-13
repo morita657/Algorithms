@@ -32,3 +32,14 @@ class Solution:
             elif e not in set1:
                 visited.add(e)
         return res
+
+
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        numSet1 = set(nums1)
+        numSet2 = set(nums2)
+        seen = []
+        for i in numSet2:
+            if i in numSet1:
+                seen.append(i)
+        return seen
