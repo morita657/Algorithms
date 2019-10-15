@@ -10,7 +10,7 @@
 
 
 class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
+    def combine(self, n, k):
         """
         :type n: int
         :type k: int
@@ -33,6 +33,9 @@ class Solution:
         return output
 
 
+s = Solution()
+s.combine(4, 2)
+
 # Lexicographic (binary sorted) combinations
 # Initiate nums as a list of integers from 1 to k. Add n + 1 as a last element, it will serve as a sentinel.
 # Set the pointer in the beginning of the list j = 0.
@@ -44,21 +47,21 @@ class Solution:
 # Find the first number in nums such that nums[j] + 1 != nums[j + 1] and increase it by one nums[j]++ to move to the next combination.
 
 
-class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
-        # init first combination
-        nums = list(range(1, k + 1)) + [n + 1]
+# class Solution:
+#     def combine(self, n: int, k: int) -> List[List[int]]:
+#         # init first combination
+#         nums = list(range(1, k + 1)) + [n + 1]
 
-        output, j = [], 0
-        while j < k:
-            # add current combination
-            output.append(nums[:k])
-            # increase first nums[j] by one
-            # if nums[j] + 1 != nums[j + 1]
-            j = 0
-            while j < k and nums[j + 1] == nums[j] + 1:
-                nums[j] = j + 1
-                j += 1
-            nums[j] += 1
+#         output, j = [], 0
+#         while j < k:
+#             # add current combination
+#             output.append(nums[:k])
+#             # increase first nums[j] by one
+#             # if nums[j] + 1 != nums[j + 1]
+#             j = 0
+#             while j < k and nums[j + 1] == nums[j] + 1:
+#                 nums[j] = j + 1
+#                 j += 1
+#             nums[j] += 1
 
-        return output
+#         return output
