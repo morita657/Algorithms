@@ -19,3 +19,15 @@ class Solution:
         for i in nums:
             a ^= i
         return a
+
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        hashSet = []
+        for i in range(len(nums)):
+            if nums[i] in hashSet:
+                index = hashSet.index(nums[i])
+                hashSet.pop(index)
+            else:
+                hashSet.append(nums[i])
+        return hashSet[-1]
