@@ -17,9 +17,11 @@ class Solution:
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         hashTable = collections.defaultdict(list)
+        length = len(nums)
         for i in range(len(nums)):
-            if nums[i] in hashTable.keys():
+            index = nums[i] % length
+            if nums[index] in hashTable.keys():
                 return True
             else:
-                hashTable[nums[i]].append(nums[i])
+                hashTable[index].append(nums[i])
         return False
