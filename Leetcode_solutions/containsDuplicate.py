@@ -25,3 +25,11 @@ class Solution:
             else:
                 hashTable[index].append(nums[i])
         return False
+        
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        sorted_array = nums.sort()
+        for index in range(1,len(sorted(nums))):
+            if nums[index-1] == nums[index]:
+                return True
+        return False
