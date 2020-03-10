@@ -12,12 +12,11 @@ class Solution:
             return -1
 
 
-class Solution:
-    def firstUniqChar(self, s: str) -> int:
+    def firstUniqChar1(self, s: str) -> int:
         d = collections.defaultdict(int)
         for i in range(len(s)):
             d[s[i]] += 1
-        for index, key in enumerate(d):
-            if d[key] == 1:
-                return s.index(key)
+        for j in range(len(s)):
+            if d[s[j]]==1:
+                return j
         return -1
