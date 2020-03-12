@@ -46,3 +46,19 @@ class Solution:
                     break
             prefix = current
         return prefix
+
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if len(strs) == 0:
+            return ""
+        prefix = ""
+        for i in range(len(strs[0])):
+            candidate = strs[0][i]
+            for j in range(len(strs[1:])):
+                if len(strs[1+j]) < i+1:
+                    return prefix
+                elif strs[1+j][i] != candidate:
+                    return prefix
+            prefix += candidate
+        return prefix
