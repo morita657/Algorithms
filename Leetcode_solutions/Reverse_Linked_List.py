@@ -62,3 +62,29 @@ class Solution:
             p.next = currentHead
             currentHead = p
         return currentHead
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head == None or head.next == None:
+            return head
+        memory = []
+        dummyHead = ListNode(0)
+        dummyHead.next = head
+        current = head
+        while current != None:
+            memory.append(current.val)
+            current = current.next
+        reversed_memory = memory[::-1]
+        i=0
+        while head != None:
+            head.val = reversed_memory[i]
+            i+=1
+            head = head.next
+        return dummyHead.next
