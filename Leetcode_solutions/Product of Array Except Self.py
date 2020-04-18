@@ -60,3 +60,13 @@ class Solution:
             answer[i] = L[i] * R[i]
 
         return answer
+
+import numpy
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        output = []
+        for i in range(len(nums)):
+            temp = nums[:i] + nums[i+1:]
+            tempProd = numpy.prod(temp)
+            output.append(tempProd)
+        return output
