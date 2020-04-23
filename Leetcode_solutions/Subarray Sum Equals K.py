@@ -22,24 +22,6 @@ class Solution:
         return count
 
 
-public class Solution {
-    public int subarraySum(int[] nums, int k) {
-        int count = 0, sum = 0
-        HashMap < Integer, Integer > map = new HashMap < > ()
-        map.put(0, 1)
-        for (int i=0
-             i < nums.length
-             i + +) {
-            sum += nums[i]
-            if (map.containsKey(sum - k))
-            count += map.get(sum - k)
-            map.put(sum, map.getOrDefault(sum, 0) + 1)
-        }
-        return count
-    }
-}
-
-
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         if not nums:
@@ -56,3 +38,17 @@ class Solution:
             count[s] = count.get(s, 0) + 1
 
         return ret
+        
+from collections import defaultdict
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        count=0
+        total=0
+        hashmap = defaultdict(int)
+        hashmap[0]=1
+        for i in range(len(nums)):
+            total += nums[i]
+            if total-k in hashmap.keys():
+                count += hashmap.get(total-k)
+            hashmap[total]=hashmap[total]+1
+        return count
