@@ -29,7 +29,7 @@ class Solution:
             if complement in dict.keys():
                 return [dict[complement][0], i]
             dict[nums[i]].append(i)
-            
+
 from collections import defaultdict
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
@@ -40,3 +40,13 @@ class Solution:
             complement = target - nums[i]
             if map[complement] and map[complement] != i:
                 return [i, map[complement]]
+
+from collections import defaultdict
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        map = defaultdict(int)        
+        for i in range(len(nums)):
+            complement = target - nums[i]
+            if str(complement) in map and map.get(str(complement)) != i:
+                return [i, map[str(complement)]]
+            map[str(nums[i])]=i
