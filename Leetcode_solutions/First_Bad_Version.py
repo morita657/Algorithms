@@ -54,25 +54,22 @@ class Solution:
 # @param version, an integer
 # @return a bool
 # def isBadVersion(version):
-
 class Solution:
     def firstBadVersion(self, n):
         """
         :type n: int
         :rtype: int
         """
-        if n==0:
-            return -1
         left = 1
         right = n
-        while left < right:
-            mid = (left + right)//2
-            if isBadVersion(mid) and isBadVersion(mid-1)==False:
+        while left <= right:
+            mid = left + (right - left)//2
+            if not isBadVersion(mid-1) and isBadVersion(mid):
                 return mid
-            elif isBadVersion(mid) and isBadVersion(mid-1)==True:
-                right = mid
+            elif isBadVersion(mid+1) and not isBadVersion(mid):
+                return mid+1
+            if not isBadVersion(mid-1) and not isBadVersion(mid):
+                left = mid
             else:
-                left = mid+1
-        if left ==right and isBadVersion(left):
-            return left
-        return -1
+                right = mid
+        return left
