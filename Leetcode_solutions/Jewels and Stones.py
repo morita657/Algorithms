@@ -11,3 +11,13 @@ class Solution(object):
             if stone in cands:
                 jewels += 1
         return jewels
+
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        jewels = list(set(J))
+        res=0
+        for i in range(len(jewels)):
+            for j in range(len(S)):
+                if S[j] == jewels[i]:
+                    res += 1
+        return res
