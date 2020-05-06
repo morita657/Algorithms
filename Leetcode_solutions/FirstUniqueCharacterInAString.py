@@ -19,4 +19,12 @@ class Solution:
         for j in range(len(s)):
             if d[s[j]]==1:
                 return j
+        return - 1
+        
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        count = collections.Counter(s)
+        for i, ch in enumerate(s):
+            if count[ch]==1:
+                return i
         return -1
