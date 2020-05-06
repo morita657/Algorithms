@@ -31,3 +31,11 @@ class Solution:
         if target > 2147483647+1 or target < -2147483648-1:
             return 0
         return target
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        if x<0:
+            val = -1*int(str(-x)[::-1])
+        else:
+            val = int(str(x)[::-1])
+        return val if abs(val) < 2**31-1 else 0
