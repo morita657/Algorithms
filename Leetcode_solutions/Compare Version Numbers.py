@@ -1,27 +1,12 @@
 class Solution:
     def compareVersion(self, version1: str, version2: str) -> int:
-#         split and convert elements into integer
-        def splitter(version):
-            splitted = version.split(".")
-            for i in range(len(splitted)):
-                splitted[i] = int(splitted[i])
-            return splitted
-        
-        first = splitter(version1)
-        second = splitter(version2)
-#         add 0s if there are differences between the length of two versions
-        if len(first) > len(second):
-            count = len(first) - len(second)
-            for _ in range(count):
-                second.append(0)
-        else:
-            count = len(second) - len(first)
-            for _ in range(count):
-                first.append(0)
-#                 compare
-        for i in range(len(first)):
-            if first[i] > second[i]:
-                return 1
-            if first[i] < second[i]:
-                return -1
+        nums1 = version1.split(".")
+        nums2 = version2.split(".")
+        n1, n2 = len(nums1), len(nums2)
+
+        for i in range(max(n1, n2)):
+            i1 = int(nums1[i]) if i < n1 else 0
+            i2 = int(nums2[i]) if i < n2 else 0
+            if i1 != i2:
+                return 1 if i1 > i2 else - 1
         return 0
