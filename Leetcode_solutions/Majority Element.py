@@ -14,3 +14,8 @@ class Solution(object):
                 current = d[key]
                 ans = key
         return ans
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        count = collections.Counter(nums)
+        return count.most_common(1)[0][0]
