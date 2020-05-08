@@ -18,3 +18,9 @@ class Solution:
         for number in range(n):
             if number not in num_set:
                 return number
+
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        total = ((len(nums)) * (len(nums)+1)) // 2
+        current_total = sum(nums)
+        return (total - current_total)
